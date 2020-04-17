@@ -6,11 +6,21 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <style type="text/css">
+        .auto-style1 {
+            font-size: large;
+            background-color: #666666;
+        }
+        .auto-style2 {
+            font-size: large;
+            color: #666666;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div style="margin-left: 320px">
-          <p>  <u>DESTINO INICIO</u> </p>
+          <p>  <u><strong><span class="auto-style2">DESTINO INICIO</span></strong></u> </p>
             <strong>PROVINCIA</strong>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:DropDownList ID="ddlPciaInicio" runat="server" Height="23px" Width="269px">
             </asp:DropDownList>
@@ -21,7 +31,7 @@
             </asp:DropDownList>
             <br />
             <br />
-           <p> <u>DESTINO FINAL</u>  </p> 
+           <p> <u><strong><span class="auto-style1">DESTINO FINAL</span></strong></u>  </p> 
 
             <strong>PROVINCIA:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:DropDownList ID="ddlPciaDestino" runat="server" Height="16px" Width="263px">
