@@ -9,7 +9,7 @@
     <style type="text/css">
         .auto-style1 {
             font-size: large;
-            background-color: #666666;
+            color: #CC0000;
         }
         .auto-style2 {
             font-size: large;
@@ -27,7 +27,7 @@
             <br />
             <br />
             <strong>LOCALIDAD:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>
-            <asp:DropDownList ID="ddlLocalidadinicio" runat="server" Width="263px">
+            <asp:DropDownList ID="ddlLocalidadinicio" runat="server" Width="263px" OnSelectedIndexChanged="ddlLocalidadinicio_SelectedIndexChanged">
             </asp:DropDownList>
             <br />
             <br />
