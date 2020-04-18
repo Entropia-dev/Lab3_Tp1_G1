@@ -34,14 +34,19 @@
            <p> <u><strong><span class="auto-style1">DESTINO FINAL</span></strong></u>  </p> 
 
             <strong>PROVINCIA:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="ddlPciaDestino" runat="server" Height="16px" Width="263px" AutoPostBack="True">
+            <asp:DropDownList ID="ddlPciaDestino" runat="server" Height="16px" Width="263px" AutoPostBack="True" OnSelectedIndexChanged="PciaDestino">
             </asp:DropDownList>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="lblMensajeError" runat="server"></asp:Label>
             <br />
             </strong>
             <br />
             <strong>LOCALIDAD:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="ddlLocalidaddestino" runat="server" Height="26px" Width="262px" AutoPostBack="True">
+            <asp:DropDownList ID="ddlLocalidaddestino" runat="server" Height="26px" Width="262px" AutoPostBack="True" OnSelectedIndexChanged="LocDestino">
             </asp:DropDownList>
+            <br />
+            <br />
+            <br />
             </strong></div>
     </form>
 </body>

@@ -15,12 +15,13 @@ namespace Trabajo_Practico_G1
         {
             if (!IsPostBack)
             {
-                IniciarLlenadoDdl();
+                IniciarLlenadoDdl_Inicio();
+                IniciarLlenadoDdl_Final();
             }
 
         }
 
-        private void IniciarLlenadoDdl()
+        private void IniciarLlenadoDdl_Inicio()
         {
             ddlPciaInicio.DataSource = Consultar("SELECT * FROM Provincias");
             ddlPciaInicio.DataTextField = "NombreProvincia";
@@ -29,7 +30,18 @@ namespace Trabajo_Practico_G1
             ddlPciaInicio.Items.Insert(0,new ListItem("[Seleccionar]","0"));
             ddlLocalidadinicio.Items.Insert(0,new ListItem("[Seleccionar]","0"));
         }
-           
+        private void IniciarLlenadoDdl_Final()
+        {
+            ddlPciaDestino.DataSource = Consultar("SELECT * FROM Provincias");
+            ddlPciaDestino.DataTextField = "NombreProvincia";
+            ddlPciaDestino.DataValueField = "IdProvincia";
+            ddlPciaDestino.DataBind();
+            ddlPciaDestino.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
+            ddlLocalidaddestino.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
+
+            
+        }
+
         protected void ProvinciaSeleccionada(object sender, EventArgs e)
         {
             int PciaId = Convert.ToInt32(ddlPciaInicio.SelectedValue);
@@ -55,6 +67,21 @@ namespace Trabajo_Practico_G1
             da.Fill(ds);
             con.Close();
             return ds;
+        }
+
+        protected void PciaDestino(object sender, EventArgs e)
+        {
+            int PciaId = Convert.ToInt32(ddlPciaDestino.SelectedValue);
+            ddlLocalidaddestino.DataSource = Consultar("SELECT * FROM Localidades WHERE IdProvincia=" + PciaId);
+            ddlLocalidaddestino.DataTextField = "NombreLocalidad";
+            ddlLocalidaddestino.DataValueField = "IdLocalidad";
+            ddlLocalidaddestino.DataBind();
+            ddlLocalidaddestino.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
+        }
+
+        protected void LocDestino(object sender, EventArgs e)
+        {
+
         }
     }
 }
