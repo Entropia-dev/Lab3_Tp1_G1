@@ -13,39 +13,74 @@ namespace Trabajo_Practico_G1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack == false)
+            if (!IsPostBack)
             {
-                SqlConnection cn = new SqlConnection(@"Data Source=localhost\sqlexpress;Initial Catalog=Viajes;Integrated Security=True");
-                cn.Open();
-
-                SqlCommand cmd = new SqlCommand("Select * from Provincias", cn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                ddlPciaInicio.DataSource = dr;
-                ddlPciaInicio.DataTextField = "NombreProvincia";
-                ddlPciaInicio.DataValueField = "IdProvincia";
-                ddlPciaInicio.DataBind();
-                cn.Close();
+                IniciarLlenadoDdl_Inicio();
+                IniciarLlenadoDdl_Final();
             }
 
         }
 
-        protected void ddlLocalidadinicio_SelectedIndexChanged(object sender, EventArgs e)
+        private void IniciarLlenadoDdl_Inicio()
         {
-            string consultasql = "select * from localidades where IdProvincia =" + ddlPciaInicio.SelectedValue;
+            ddlPciaInicio.DataSource = Consultar("SELECT * FROM Provincias");
+            ddlPciaInicio.DataTextField = "NombreProvincia";
+            ddlPciaInicio.DataValueField = "IdProvincia";
+            ddlPciaInicio.DataBind();
+            ddlPciaInicio.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
+            ddlLocalidadinicio.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
+        }
+        private void IniciarLlenadoDdl_Final()
+        {
+            ddlPciaDestino.DataSource = Consultar("SELECT * FROM Provincias");
+            ddlPciaDestino.DataTextField = "NombreProvincia";
+            ddlPciaDestino.DataValueField = "IdProvincia";
+            ddlPciaDestino.DataBind();
+            ddlPciaDestino.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
+            ddlLocalidaddestino.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
 
-            if (IsPostBack == false)
-            {
-                SqlConnection cn = new SqlConnection(@"Data Source=localhost\sqlexpress;Initial Catalog=Viajes;Integrated Security=True");
-                cn.Open();
 
-                SqlCommand cmd = new SqlCommand("Select * from Localidades", cn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                ddlLocalidadinicio.DataSource = dr;
-                ddlLocalidadinicio.DataTextField = "NombreLocalidad";
-                ddlLocalidadinicio.DataValueField = "IdLocalidad";
-                ddlLocalidadinicio.DataBind();
-                cn.Close();
-            }
+        }
+
+        protected void ProvinciaSeleccionada(object sender, EventArgs e)
+        {
+            int PciaId = Convert.ToInt32(ddlPciaInicio.SelectedValue);
+            ddlLocalidadinicio.DataSource = Consultar("SELECT * FROM Localidades WHERE IdProvincia=" + PciaId);
+            ddlLocalidadinicio.DataTextField = "NombreLocalidad";
+            ddlLocalidadinicio.DataValueField = "IdLocalidad";
+            ddlLocalidadinicio.DataBind();
+            ddlLocalidadinicio.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
+        }
+
+        protected void LocalidadSeleccionada(object sender, EventArgs e)
+        {
+
+        }
+        public DataSet Consultar(string strSQL)
+        {
+            string strconn = @"Data Source=localhost\sqlexpress;Initial Catalog=Viajes;Integrated Security=True";
+            SqlConnection con = new SqlConnection(strconn);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            con.Close();
+            return ds;
+        }
+
+        protected void PciaDestino(object sender, EventArgs e)
+        {
+            int PciaId = Convert.ToInt32(ddlPciaDestino.SelectedValue);
+            ddlLocalidaddestino.DataSource = Consultar("SELECT * FROM Localidades WHERE IdProvincia=" + PciaId);
+            ddlLocalidaddestino.DataTextField = "NombreLocalidad";
+            ddlLocalidaddestino.DataValueField = "IdLocalidad";
+            ddlLocalidaddestino.DataBind();
+            ddlLocalidaddestino.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
+        }
+
+        protected void LocDestino(object sender, EventArgs e)
+        {
 
         }
     }
