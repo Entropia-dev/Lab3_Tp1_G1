@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Punto2.aspx" />
     <Content Include="Punto3.aspx" />
+    <Content Include="Punto3a.aspx" />
     <Content Include="Web.config" />
     <Content Include="Punto1.aspx" />
   </ItemGroup>
@@ -94,6 +95,13 @@
     </Compile>
     <Compile Include="Punto3.aspx.designer.cs">
       <DependentUpon>Punto3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Punto3a.aspx.cs">
+      <DependentUpon>Punto3a.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Punto3a.aspx.designer.cs">
+      <DependentUpon>Punto3a.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

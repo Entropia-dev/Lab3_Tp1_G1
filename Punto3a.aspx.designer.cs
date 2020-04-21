@@ -11,7 +11,7 @@ namespace Trabajo_Practico_G1
 {
 
 
-    public partial class Punto3
+    public partial class Punto3a
     {
 
         /// <summary>
@@ -24,21 +24,12 @@ namespace Trabajo_Practico_G1
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control ddlTemas.
+        /// Control gvLibros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTemas;
-
-        /// <summary>
-        /// Control btnLibro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLibro;
+        protected global::System.Web.UI.WebControls.GridView gvLibros;
     }
 }

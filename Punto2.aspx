@@ -11,7 +11,8 @@
     <form id="form1" runat="server">
         <div>
             Id Producto:&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="ddlProducto" runat="server" Height="23px" Width="220px">
+            <asp:DropDownList ID="ddlProducto" runat="server" Height="23px" Width="220px" AutoPostBack="True" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged">
+                <asp:ListItem>--Selecione--</asp:ListItem>
             </asp:DropDownList>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="txtProducto" runat="server"></asp:TextBox>
@@ -19,18 +20,20 @@
         <p>
             Id Categoria:&nbsp;&nbsp;&nbsp;
             <asp:DropDownList ID="ddlCategoria" runat="server" Height="25px" Width="220px">
+                <asp:ListItem>--Seleccione--</asp:ListItem>
             </asp:DropDownList>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="txtCategoria" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtCategoria" runat="server" OnTextChanged="txtCategoria_TextChanged"></asp:TextBox>
         </p>
         <p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" Width="180px" />
+            <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" Width="180px" OnClick="btnFiltrar_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="btnQuitarfiltro" runat="server" Text="Quitar Filtro" Width="180px" />
+            <asp:Button ID="btnQuitarfiltro" runat="server" Text="Quitar Filtro" Width="180px" OnClick="btnQuitarfiltro_Click" />
         </p>
         <p>
-            &nbsp;</p>
+            <asp:Label ID="LblMensaje" runat="server" Text="Label"></asp:Label>
+        </p>
         <p>
             <asp:GridView ID="grdProductos" runat="server">
             </asp:GridView>

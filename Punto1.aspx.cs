@@ -13,75 +13,75 @@ namespace Trabajo_Practico_G1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string ruta_vijaes = "Data Source=localhost\\sqlexpress;Initial Catalog=Viajes;Integrated Security=True";
             if (!IsPostBack)
             {
-                IniciarLlenadoDdl_Inicio();
-                IniciarLlenadoDdl_Final();
+                SqlConnection coneccion_vijaes = new SqlConnection(ruta_vijaes);
+                coneccion_vijaes.Open();
+
+                SqlCommand cmd = new SqlCommand("Select * from provincias", coneccion_vijaes);
+                SqlDataReader leer_datos = cmd.ExecuteReader();
+                ddlPciaInicio.DataSource = leer_datos;
+                ddlPciaInicio.DataTextField = "NombreProvincia";
+                ddlPciaInicio.DataValueField = "IdProvincia";
+                ddlPciaInicio.DataBind();
+                coneccion_vijaes.Close();
             }
 
         }
 
-        private void IniciarLlenadoDdl_Inicio()
+        protected void ddlPciaInicio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ddlPciaInicio.DataSource = Consultar("SELECT * FROM Provincias");
-            ddlPciaInicio.DataTextField = "NombreProvincia";
-            ddlPciaInicio.DataValueField = "IdProvincia";
-            ddlPciaInicio.DataBind();
-            ddlPciaInicio.Items.Insert(0,new ListItem("[Seleccionar]","0"));
-            ddlLocalidadinicio.Items.Insert(0,new ListItem("[Seleccionar]","0"));
-        }
-        private void IniciarLlenadoDdl_Final()
-        {
-            ddlPciaDestino.DataSource = Consultar("SELECT * FROM Provincias");
+            if (IsPostBack) { 
+            string ruta_vijaes = "Data Source=localhost\\sqlexpress;Initial Catalog=Viajes;Integrated Security=True";   //ruta de coneccion a la db viajes
+            SqlConnection coneccion_viajes = new SqlConnection(ruta_vijaes);    //
+            coneccion_viajes.Open();
+            SqlCommand consulta_viajes = new SqlCommand("Select * from provincias where NombreProvincia NOT LIKE  '" + ddlPciaInicio.SelectedItem.Text + "'", coneccion_viajes);
+            SqlDataReader leer_viajes = consulta_viajes.ExecuteReader();
+
+            ddlPciaDestino.DataSource = leer_viajes;
             ddlPciaDestino.DataTextField = "NombreProvincia";
             ddlPciaDestino.DataValueField = "IdProvincia";
             ddlPciaDestino.DataBind();
-            ddlPciaDestino.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
-            ddlLocalidaddestino.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
 
-            
-        }
+            coneccion_viajes.Close();
 
-        protected void ProvinciaSeleccionada(object sender, EventArgs e)
-        {
-            int PciaId = Convert.ToInt32(ddlPciaInicio.SelectedValue);
-            ddlLocalidadinicio.DataSource = Consultar("SELECT * FROM Localidades WHERE IdProvincia="+PciaId);
+
+
+            // aca voy a cargar las localidades
+        
+            SqlConnection coneccion_viajes1 = new SqlConnection(ruta_vijaes);    //
+            coneccion_viajes1.Open();
+            SqlCommand consulta_viajes1 = new SqlCommand("select * from localidades where IdProvincia =" + ddlPciaInicio.SelectedValue, coneccion_viajes1);
+            SqlDataReader leer_viajes1 = consulta_viajes1.ExecuteReader();
+
+            ddlLocalidadinicio.DataSource = leer_viajes1;
             ddlLocalidadinicio.DataTextField = "NombreLocalidad";
             ddlLocalidadinicio.DataValueField = "IdLocalidad";
             ddlLocalidadinicio.DataBind();
-            ddlLocalidadinicio.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
+
+            coneccion_viajes1.Close();
+            }
         }
 
-        protected void LocalidadSeleccionada(object sender, EventArgs e)
+        protected void ddlPciaDestino_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                string ruta_vijaes = "Data Source=localhost\\sqlexpress;Initial Catalog=Viajes;Integrated Security=True";   //ruta de coneccion a la db viajes
+                SqlConnection coneccion_viajes = new SqlConnection(ruta_vijaes);    //
+                coneccion_viajes.Open();
+                
+                SqlCommand consulta_viajes1 = new SqlCommand("select * from localidades where IdProvincia =" + ddlPciaDestino.SelectedValue, coneccion_viajes);
+                SqlDataReader leer_viajes1 = consulta_viajes1.ExecuteReader();
 
-        }
-        public DataSet Consultar(string strSQL)
-        {
-            string strconn = @"Data Source=localhost\sqlexpress;Initial Catalog=Viajes;Integrated Security=True";
-            SqlConnection con = new SqlConnection(strconn);
-            con.Open();
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            con.Close();
-            return ds;
-        }
+                ddlLocalidaddestino.DataSource = leer_viajes1;
+                ddlLocalidaddestino.DataTextField = "NombreLocalidad";
+                ddlLocalidaddestino.DataValueField = "IdLocalidad";
+                ddlLocalidaddestino.DataBind();
 
-        protected void PciaDestino(object sender, EventArgs e)
-        {
-            int PciaId = Convert.ToInt32(ddlPciaDestino.SelectedValue);
-            ddlLocalidaddestino.DataSource = Consultar("SELECT * FROM Localidades WHERE IdProvincia=" + PciaId);
-            ddlLocalidaddestino.DataTextField = "NombreLocalidad";
-            ddlLocalidaddestino.DataValueField = "IdLocalidad";
-            ddlLocalidaddestino.DataBind();
-            ddlLocalidaddestino.Items.Insert(0, new ListItem("[Seleccionar]", "0"));
-        }
-
-        protected void LocDestino(object sender, EventArgs e)
-        {
-
+                coneccion_viajes.Close();
+            }
         }
     }
 }

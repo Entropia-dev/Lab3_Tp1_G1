@@ -22,19 +22,19 @@
         <div style="margin-left: 320px">
           <p>  <u><strong><span class="auto-style2">DESTINO INICIO</span></strong></u> </p>
             <strong>PROVINCIA</strong>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="ddlPciaInicio" runat="server" Height="23px" Width="269px" AutoPostBack="True" OnSelectedIndexChanged="ProvinciaSeleccionada">
+            <asp:DropDownList ID="ddlPciaInicio" runat="server" Height="23px" Width="269px" AutoPostBack="True" OnSelectedIndexChanged="ddlPciaInicio_SelectedIndexChanged">
             </asp:DropDownList>
             <br />
             <br />
             <strong>LOCALIDAD:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>
-            <asp:DropDownList ID="ddlLocalidadinicio" runat="server" Width="263px" OnSelectedIndexChanged="LocalidadSeleccionada" AutoPostBack="True">
+            <asp:DropDownList ID="ddlLocalidadinicio" runat="server" Width="263px">
             </asp:DropDownList>
             <br />
             <br />
            <p> <u><strong><span class="auto-style1">DESTINO FINAL</span></strong></u>  </p> 
 
             <strong>PROVINCIA:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="ddlPciaDestino" runat="server" Height="16px" Width="263px" AutoPostBack="True" OnSelectedIndexChanged="PciaDestino">
+            <asp:DropDownList ID="ddlPciaDestino" runat="server" Height="16px" Width="263px" AutoPostBack="True" OnSelectedIndexChanged="ddlPciaDestino_SelectedIndexChanged">
             </asp:DropDownList>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="lblMensajeError" runat="server"></asp:Label>
@@ -42,7 +42,7 @@
             </strong>
             <br />
             <strong>LOCALIDAD:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:DropDownList ID="ddlLocalidaddestino" runat="server" Height="26px" Width="262px" AutoPostBack="True" OnSelectedIndexChanged="LocDestino">
+            <asp:DropDownList ID="ddlLocalidaddestino" runat="server" Height="26px" Width="262px">
             </asp:DropDownList>
             <br />
             <br />
@@ -51,3 +51,4 @@
     </form>
 </body>
 </html>
+
